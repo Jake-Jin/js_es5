@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- <link href="es5.css" type="txt/css" rel="stylesheet"> -->
+    <!-- <script src="es5.js" type="txt/javascript"></script> -->
+
+    <title>JS Basic</title>
+</head>
+    <style>
+        body {
+            font-size: 60px;
+        }
+    </style>
+<body>
+    <h1>Hello!</h1>
+    <script>
+        var x = 3;                                          // var x = new Number(3);
+        console.log(x);
+
+    //Array with push, pop, splice;
+        var nums = new Array(1,3,5,new Array(2,4,6,8));   // var nums = [];
+                                                            // var nums = [1, 3, 5, [2, 4, 6, 8]];
+        
+        //Stack type - push, pop; 스택방식으로 push 된 데이터가 쌓이고 pop 된 데이터는 array 에서 사라짐
+        nums.push(7);
+        var num = nums.pop();
+        console.log(num);
+
+        //List type - index; 인덱스에 의해 데이터를 입/출력할 수 있고 데이터가 array 에 그대로 보존됨
+        nums[3].splice(2);                      // index 2 부터 뒤에 있는 모든 데이터를 삭제
+        console.log(nums);
+        nums[3].splice(1,1);                    // index 1 부터 1개의 데이터를 삭제
+        console.log(nums);                          
+        nums[3].splice(0, 1, 2.1,4.1,6.1,8.1);  // index 0 부터 1개를 지우고 index 0 부터 데이터 삽입; 2.1, 4.1, 6.1, 8.1
+        console.log(nums);
+        console.log(typeof nums[3][0]);
+        
+        //Tip: List == Array, Map == Object
+    
+    //Object
+        var exam = new Object();                        // var exam = {};
+                                                        // var exam = {"programming":95, ...};
+        exam.programming = 95;              //exam. (default way)
+        exam.web = 70;
+        exam.infoSystem = 80;
+        exam.foundation = 80;
+        console.log(exam);
+        console.log(exam.programming + exam.foundation);
+        exam["programming"] = 99;           // exam[""] (additional way)
+        console.log(exam['programming']);   // ''
+        var key = "programming";            // for using another key
+        exam[key] = 95;                     // using [key], not available at exam.
+        console.log(exam[key]);
+        
+    //JSON
+        var notices = [{"id":1,"title":"hello json"},
+        {"id":2,"title":"hi json"},
+        {"id":3,"title":"json is ..."}];
+        console.log(notices[1]);
+
+        // eval for universal usage and JSON.parse for only json data
+        //Tip: json data might be a string usually when reading json document, not object
+        var data = '[                   \
+            {"id":1,"title":"aaa"},     \
+            {"id":2,"title":"bbb"},     \
+            {"id":3,"title":"ccc"}      \
+        ]';                             // using '\' in each line when making words with "" as string
+        
+        // 1. eval()
+        eval("var temp = " + data + ";");
+        console.log(temp[1].title);
+
+        // 2. JSON.parse
+        var data2 = [                   // possible without "" for property(key) declaration in javascript
+            {id:1,title:"aaa"},         // but when using JSON.parse, "" needed // solution: JSON.stringify then JSON.parse
+            {id:2,title:"bbb"},         // moreover, e.g., "n id":1 when key is a column name with white spaces
+            {id:3,title:"ccc"}
+        ];
+        var data3 = JSON.parse('{"id":6, "title":"aaa"}');  // error if without "" for property
+        console.log(data3.id);
+        //Stringify
+        var jsonData2 = JSON.stringify(data2);
+        console.log(jsonData2);
+
+    //Operators in javascript
+            // === and !==
+        var x = 3;
+        var y = 3;
+                                    // value comparison
+        document.write(x == y);     // true; 
+                                    // reference comparison
+        document.write(x === y);    // true; why? because of value declaration without new Number()
+        var z = new Number(3);
+        document.write(x === z);    // false;
+
+    //Statements
+        var ar = ["aa", "bb", "cc"];                        // array
+        var ob = {id:1, title:"hello", writeID:"newlec"};   // object
+        for (i in ar) {             //for (var i = 0; i < ar.length; i++)
+            document.write(ar[i] + "<br>");
+        }
+        for (i in ob) {
+            document.write(ob[i] + "<br>");
+        }
+
+    //Functions
+    //Function template declaration is not independently required in javascript,
+    //just implement with template as an object
+    //e.g. var add = new Function("x, y", "return x+y;");
+        //1)
+        var add = new Function("x, y", "return x+y;");  //with ;
+        //2) common way
+        var add2 = function (x, y) {
+            return x + y;
+        };                                              //with ;
+        //3)
+        function add3(x, y) {
+            return x + y;
+        }                                               //without ;
+        document.write(add(3, 4));
+        document.write(add2(3, 4));
+        document.write(add3(3, 4));
+        //4) with more parameters than declared
+        function add4(x, y) { // two parameters declared
+            document.write(arguments.length);   //arguments store parameters
+            document.write(arguments[2]);
+            return x + y;
+        }
+        document.write(add4(1,2,"aaa",4,5,6,7,8));
+
+    //Closure
+        function f1() {
+            var a = 1;
+            return function f2() {      // at this return stage, f1 function can't close itself
+                return a;               // because its child(f2 function) has to use variable 'a' of parent(f1)
+            }                           // so variables in f1 function still exist until f2 closes
+        }                               // in this function, f2 is called 'closure'
+        var f = f1();       // = f1();  => implement f1 function
+                            // = f1;    => declare f1 function
+        var a = f();
+        document.write(a);
+
+
+    </script>
+</body>
+</html>

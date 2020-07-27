@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform</title>
+
+    <style>
+        body {
+            font-size: 40px;
+        }
+
+    </style>
+</head>
+<body>
+    <script>
+    //window.?
+        //alert
+        // prompt
+        var x = prompt("x 값을 입력하세요", 0);     //return value is always string type
+        var y = prompt("y 값을 입력하세요", 0);
+        document.write(x + y);
+
+        x = parseInt(x);            //convert string to int
+        y = parseInt(y);
+        document.write(x + y);
+        var z = parseInt("abc");    //returns NaN(Not A Number) when not able to convert
+        var z = parseInt("40px");   //return only number if the number is in front
+        document.write(z);
+        // confirm
+        var answer = confirm("정말로 삭제하실 생각입니까?");    //returns true or false
+        if(answer)
+            document.write("삭제되었습니다.");
+
+    </script>
+    
+</body>
+</html>

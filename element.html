@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element</title>
+    <script src="element.js"></script>  <!--first reading-->
+    <script src="element2.js"></script> <!--second reading-->
+    <style>
+        body {
+            font-size: 40px;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Event -->
+    <input id="btn" type="button" value="출력" onclick="event1();"><br>
+    <span id="span-words">Span!</span> <!-- good way moving onclick to script section -->
+                                <!-- but script will be read earlier than body section
+                                    so, span.onclick doesn't work because span doesn't exist
+                                sol 1) move body section onto script section
+                                sol 2) declare init. function running when window finishes all loading-->
+</body>
+</html>
